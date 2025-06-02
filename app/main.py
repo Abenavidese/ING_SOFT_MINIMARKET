@@ -7,6 +7,7 @@ from app.models import producto, cliente, proveedor, categoria, venta, detalle_v
 # Importa los routers
 from app.controllers.categoria_controller import router as categoria_router
 from app.controllers.caja_controller import router as caja_router  # caja añadida
+from app.controllers.cliente_controller import router as cliente_router
 
 # 1. Instancia de la app
 app = FastAPI(title="MiniMercado API", version="1.0")
@@ -22,3 +23,4 @@ def root():
 # 4. Routers
 app.include_router(categoria_router)
 app.include_router(caja_router)  #  incluir el router de caja
+app.include_router(cliente_router)
