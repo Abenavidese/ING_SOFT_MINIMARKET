@@ -11,3 +11,11 @@ class CajaOut(CajaCreate):
 
     class Config:
         orm_mode = True
+
+class CajaUpdate(BaseModel):
+    fecha: date
+    estado: str
+    total_dia: float
+
+    class Config:
+        from_attributes = True

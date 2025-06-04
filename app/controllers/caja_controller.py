@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from app.config.database import SessionLocal
 from app.schemas.caja_schema import CajaCreate, CajaOut
 from app.services import caja_service
+from app.schemas.caja_schema import CajaUpdate
+from app.services.caja_service import actualizar_caja_service
 
 router = APIRouter(prefix="/cajas", tags=["Cajas"])
 
@@ -27,3 +29,7 @@ def eliminar_caja(caja_id: int, db: Session = Depends(get_db)):
     if not eliminada:
         raise HTTPException(status_code=404, detail="Caja no encontrada")
     return None  # 204 No Content
+
+@router.put("/{caja_id}", response_model=CajaOut)
+def actualizar_caja(caja_id: int, data: CajaUpdate, db: Session = Depends(get_db)):
+    return actualizar_caja_service(db, caja_id, data)
