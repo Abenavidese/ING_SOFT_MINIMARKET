@@ -11,3 +11,12 @@ class ClienteOut(ClienteCreate):
 
     class Config:
         orm_mode = True
+
+class ClienteUpdate(BaseModel):
+    nombre: str
+    email: str
+    telefono: str
+    frecuente: bool
+
+    class Config:
+        from_attributes = True
