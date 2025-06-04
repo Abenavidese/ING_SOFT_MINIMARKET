@@ -18,3 +18,11 @@ def eliminar_proveedor(db: Session, proveedor_id: int) -> bool:
         db.commit()
         return True
     return False
+
+def obtener_proveedor_por_id(db: Session, proveedor_id: int):
+    return db.query(Proveedor).filter(Proveedor.id == proveedor_id).first()
+
+def actualizar_proveedor(db: Session, proveedor: Proveedor):
+    db.commit()
+    db.refresh(proveedor)
+    return proveedor
