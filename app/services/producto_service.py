@@ -7,3 +7,6 @@ def crear_producto_service(db: Session, producto: ProductoCreate):
 
 def listar_productos_service(db: Session):
     return producto_repository.listar_productos(db)
+
+def eliminar_producto_service(db: Session, producto_id: int) -> bool:
+    return producto_repository.eliminar_producto(db, producto_id)

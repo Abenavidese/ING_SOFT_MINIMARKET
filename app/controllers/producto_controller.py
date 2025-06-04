@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.config.database import SessionLocal
 from app.schemas.producto_schema import ProductoCreate, ProductoOut
@@ -20,3 +20,10 @@ def crear_producto(producto: ProductoCreate, db: Session = Depends(get_db)):
 @router.get("/", response_model=list[ProductoOut])
 def listar_productos(db: Session = Depends(get_db)):
     return producto_service.listar_productos_service(db)
+
+@router.delete("/{producto_id}", status_code=204)
+def eliminar_producto(producto_id: int, db: Session = Depends(get_db)):
+    eliminado = producto_service.eliminar_producto_service(db, producto_id)
+    if not eliminado:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    return None  # 204 No Content
