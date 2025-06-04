@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from app.config.database import SessionLocal
 from app.schemas.categoria_schema import CategoriaCreate, CategoriaOut
 from app.services import categoria_service
+from app.schemas.categoria_schema import CategoriaUpdate
 
 router = APIRouter(prefix="/categorias", tags=["Categorias"])
 
@@ -29,3 +30,7 @@ def eliminar_categoria(categoria_id: int, db: Session = Depends(get_db)):
     if not eliminada:
         raise HTTPException(status_code=404, detail="Categoría no encontrada")
     return None  # 204 No Content
+
+@router.put("/{categoria_id}", response_model=CategoriaOut)
+def actualizar_categoria(categoria_id: int, data: CategoriaUpdate, db: Session = Depends(get_db)):
+    return categoria_service.actualizar_categoria_service(db, categoria_id, data)
