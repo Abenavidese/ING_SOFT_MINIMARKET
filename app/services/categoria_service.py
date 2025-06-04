@@ -10,3 +10,6 @@ def crear_categoria(db: Session, categoria: CategoriaCreate) -> Categoria:
 
 def listar_categorias(db: Session) -> list[Categoria]:
     return categoria_repository.listar_categorias(db)
+
+def eliminar_categoria(db: Session, categoria_id: int) -> bool:
+    return categoria_repository.eliminar_categoria(db, categoria_id)

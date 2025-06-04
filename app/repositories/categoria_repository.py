@@ -13,3 +13,11 @@ def crear_categoria(db: Session, categoria: CategoriaCreate) -> Categoria:
 
 def listar_categorias(db: Session) -> list[Categoria]:
     return db.query(Categoria).all()
+
+def eliminar_categoria(db: Session, categoria_id: int) -> bool:
+    categoria = db.query(Categoria).filter(Categoria.id == categoria_id).first()
+    if categoria:
+        db.delete(categoria)
+        db.commit()
+        return True
+    return False
