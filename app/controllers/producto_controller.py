@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from app.config.database import SessionLocal
 from app.schemas.producto_schema import ProductoCreate, ProductoOut
 from app.services import producto_service
+from app.schemas.producto_schema import ProductoUpdate, ProductoOut
+from app.services.producto_service import actualizar_producto_service
 
 router = APIRouter(prefix="/productos", tags=["Productos"])
 
@@ -27,3 +29,7 @@ def eliminar_producto(producto_id: int, db: Session = Depends(get_db)):
     if not eliminado:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
     return None  # 204 No Content
+
+@router.put("/{producto_id}", response_model=ProductoOut)
+def actualizar_producto(producto_id: int, data: ProductoUpdate, db: Session = Depends(get_db)):
+    return actualizar_producto_service(db, producto_id, data)

@@ -14,3 +14,13 @@ class ProductoOut(ProductoCreate):
 
     class Config:
         orm_mode = True
+
+class ProductoUpdate(BaseModel):
+    nombre: str
+    precio: float
+    stock: int
+    proveedor_id: int
+    categoria_id: int
+
+    class Config:
+        from_attributes = True
