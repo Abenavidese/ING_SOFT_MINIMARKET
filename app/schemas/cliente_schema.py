@@ -7,6 +7,7 @@ class ClienteCreate(BaseModel):
 
 class ClienteOut(ClienteCreate):
     id: int
+    frecuente: bool 
 
     class Config:
         orm_mode = True

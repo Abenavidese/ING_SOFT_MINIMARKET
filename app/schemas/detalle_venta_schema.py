@@ -4,7 +4,7 @@ class DetalleVentaCreate(BaseModel):
     venta_id: int
     producto_id: int
     cantidad: int
-    subtotal: float
+    precio_unitario: float
 
 class DetalleVentaOut(DetalleVentaCreate):
     id: int
