@@ -3,6 +3,8 @@ from sqlalchemy.orm import Session
 from app.config.database import SessionLocal
 from app.schemas.venta_schema import VentaCreate, VentaOut
 from app.services.venta_service import registrar_venta_service, listar_ventas_service, eliminar_venta_service
+from app.schemas.venta_schema import VentaUpdate, VentaOut
+from app.services import venta_service
 
 router = APIRouter(prefix="/ventas", tags=["Ventas"])
 
@@ -27,3 +29,7 @@ def eliminar_venta(venta_id: int, db: Session = Depends(get_db)):
     if not eliminado:
         raise HTTPException(status_code=404, detail="Venta no encontrada")
     return None  # 204 No Content
+
+@router.put("/{venta_id}", response_model=VentaOut)
+def actualizar_venta(venta_id: int, data: VentaUpdate, db: Session = Depends(get_db)):
+    return venta_service.actualizar_venta_service(db, venta_id, data)

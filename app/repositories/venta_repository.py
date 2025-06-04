@@ -18,3 +18,13 @@ def eliminar_venta(db: Session, venta_id: int) -> bool:
         db.commit()
         return True
     return False
+
+def actualizar_venta(db: Session, venta_id: int, data: dict) -> Venta:
+    venta = db.query(Venta).filter(Venta.id == venta_id).first()
+    if not venta:
+        return None
+    for key, value in data.items():
+        setattr(venta, key, value)
+    db.commit()
+    db.refresh(venta)
+    return venta
