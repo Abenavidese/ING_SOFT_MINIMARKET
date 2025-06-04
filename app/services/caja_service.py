@@ -9,3 +9,6 @@ def crear_caja_service(db: Session, caja_data: CajaCreate) -> Caja:
 
 def listar_cajas_service(db: Session) -> list[Caja]:
     return caja_repository.obtener_todas_las_cajas(db)
+
+def eliminar_caja_service(db: Session, caja_id: int) -> bool:
+    return caja_repository.eliminar_caja(db, caja_id)
