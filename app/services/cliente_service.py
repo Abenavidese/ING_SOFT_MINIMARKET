@@ -21,8 +21,13 @@ def actualizar_cliente_service(db: Session, cliente_id: int, data: ClienteUpdate
     if not cliente:
         raise HTTPException(status_code=404, detail="Cliente no encontrado")
 
-    for key, value in data.model_dump().items():
+    # Solo actualizar campos que fueron enviados
+    for key, value in data.model_dump(exclude_unset=True).items():
         setattr(cliente, key, value)
+
+    db.commit()
+    db.refresh(cliente)
+    return cliente
 
     db.commit()
     db.refresh(cliente)

@@ -1,1 +1,12 @@
 ver_tablas.py
+
+# Virtual environment
+venv/
+
+# Coverage reports
+htmlcov/
+coverage.xml
+
+# IDE config
+.vscode/
+.idea/
