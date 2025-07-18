@@ -1,18 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
-import { Menu } from '../menu/menu'; 
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule, Menu], 
-  templateUrl: './home.html',
-  styleUrls: ['./home.scss']
+  imports: [CommonModule],
+  templateUrl: './menu.html',
+  styleUrls: ['./menu.scss']
 })
-export class HomeComponent {
+export class Menu {
+  menuOpen = false;
+
   constructor(private auth: AuthService, private router: Router) {}
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
 
   async logout() {
     await this.auth.logout();

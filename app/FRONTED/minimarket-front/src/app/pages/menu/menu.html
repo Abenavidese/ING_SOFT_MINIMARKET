@@ -1,0 +1,22 @@
+<div class="overlay" [class.active]="menuOpen" (click)="toggleMenu()"></div>
+
+<div class="menu-wrapper" [class.open]="menuOpen">
+  <div class="menu-header">
+    <h2>Menú</h2>
+    <button class="close-btn" (click)="toggleMenu()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <ul class="menu-list">
+    <li><i class="fas fa-home"></i> Inicio</li>
+    <li><i class="fas fa-user"></i> Perfil</li>
+    <li><i class="fas fa-shopping-cart"></i> Productos</li>
+    <li><i class="fas fa-cog"></i> Configuración</li>
+    <li (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</li>
+  </ul>
+</div>
+
+<!-- Botón hamburguesa -->
+<button class="menu-toggle" (click)="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</button>

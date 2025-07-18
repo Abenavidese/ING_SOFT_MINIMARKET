@@ -1,0 +1,133 @@
+@use "sass:color";
+
+$primary-gradient: linear-gradient(135deg, #23232e, #3c3c4f);
+$highlight-color: #6c63ff;
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 900;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100%;
+  background: $primary-gradient;
+  color: #f5f5f5;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  transition: left 0.4s ease, background 0.6s;
+  z-index: 1000;
+
+  &.open {
+    left: 0;
+    animation: slideIn 0.5s ease forwards;
+  }
+
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 1.7rem;
+      margin: 0;
+      color: #fff;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .menu-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 12px 10px;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      animation: fadeIn 0.8s ease;
+
+      i {
+        margin-right: 12px;
+        font-size: 1.3rem;
+        transition: color 0.3s;
+      }
+
+      &:hover {
+        background: color.adjust($highlight-color, $lightness: -15%);
+        color: #fff;
+        box-shadow: 0 0 8px rgba(108, 99, 255, 0.8);
+      }
+    }
+  }
+}
+
+.menu-toggle {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, #6c63ff, #3b2db0);
+  border: none;
+  border-radius: 12px;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1100;
+
+  &:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.5);
+  }
+}
+
+/* Animaciones */
+@keyframes slideIn {
+  from { left: -280px; opacity: 0.8; }
+  to { left: 0; opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
