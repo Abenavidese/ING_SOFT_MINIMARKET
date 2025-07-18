@@ -1,0 +1,19 @@
+<div class="login-container">
+  <h2>Iniciar Sesión</h2>
+  <form (submit)="onLogin($event)">
+    <label>Email</label>
+    <input type="email" [(ngModel)]="email" name="email" required>
+
+    <label>Contraseña</label>
+    <input type="password" [(ngModel)]="password" name="password" required>
+
+    <button type="submit">Entrar</button>
+  </form>
+
+  <h3>¿No tienes cuenta?</h3>
+  <button (click)="onRegister()">Registrarse</button>
+
+  <p *ngIf="errorMessage" style="color:red; margin-top:10px;">
+    {{ errorMessage }}
+  </p>
+</div>
