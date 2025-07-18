@@ -7,14 +7,17 @@ import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signO
 export class AuthService {
   constructor(private auth: Auth) {}
 
+  // Login
   login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
+  // Registro
   register(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
+  // Logout
   logout() {
     return signOut(this.auth);
   }

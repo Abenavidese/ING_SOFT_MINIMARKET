@@ -20,27 +20,45 @@ export class LoginComponent {
 
   async onLogin(event: Event) {
     event.preventDefault();
+
+    if (!this.validateInputs()) return;
+
     try {
       await this.auth.login(this.email, this.password);
       this.errorMessage = '';
       this.router.navigate(['/home']);
     } catch (error: any) {
-      this.errorMessage = this.getFirebaseError(error.code);
+      console.error('Error Firebase (Login):', error);
+      this.errorMessage = this.getFirebaseError(error.code || 'desconocido');
     }
   }
 
   async onRegister() {
+    if (!this.validateInputs()) return;
+
     try {
       await this.auth.register(this.email, this.password);
       this.errorMessage = '';
       alert('Usuario registrado con éxito');
       this.router.navigate(['/home']);
     } catch (error: any) {
-      this.errorMessage = this.getFirebaseError(error.code);
+      console.error('Error Firebase (Register):', error);
+      this.errorMessage = this.getFirebaseError(error.code || 'desconocido');
     }
   }
 
-  // Traduce los errores de Firebase
+  validateInputs(): boolean {
+    if (!this.email.includes('@')) {
+      this.errorMessage = 'El email no es válido.';
+      return false;
+    }
+    if (this.password.length < 6) {
+      this.errorMessage = 'La contraseña debe tener al menos 6 caracteres.';
+      return false;
+    }
+    return true;
+  }
+
   getFirebaseError(code: string): string {
     switch (code) {
       case 'auth/email-already-in-use':
