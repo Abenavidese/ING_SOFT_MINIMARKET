@@ -1,0 +1,96 @@
+$primary-color: #6c63ff;
+$background: #1e1e2f;
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6c63ff, #3b2db0);
+}
+
+.login-container {
+  width: 350px;
+  height: 450px;
+  perspective: 1000px;
+  position: relative;
+
+  .form-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+    transition: transform 0.8s ease-in-out;
+
+    h2 {
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 80%;
+      padding: 10px;
+      margin-top: 15px;
+      background: $primary-color;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: scale(1.05);
+        background: lighten($primary-color, 10%);
+      }
+    }
+
+    .toggle-text {
+      margin-top: 20px;
+      color: white;
+
+      span {
+        color: #ffd700;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+
+    .error-text {
+      color: #ff4d4d;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+  }
+
+  &.active .login-form {
+    transform: rotateY(180deg);
+  }
+
+  &.active .register-form {
+    transform: rotateY(0deg);
+  }
+
+  .register-form {
+    transform: rotateY(180deg);
+  }
+}

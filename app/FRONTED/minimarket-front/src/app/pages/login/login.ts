@@ -15,14 +15,18 @@ export class LoginComponent {
   email = '';
   password = '';
   errorMessage = '';
+  isRegisterMode = false;
 
   constructor(private auth: AuthService, private router: Router) {}
 
+  toggleMode() {
+    this.isRegisterMode = !this.isRegisterMode;
+    this.errorMessage = '';
+  }
+
   async onLogin(event: Event) {
     event.preventDefault();
-
     if (!this.validateInputs()) return;
-
     try {
       await this.auth.login(this.email, this.password);
       this.errorMessage = '';
@@ -33,9 +37,9 @@ export class LoginComponent {
     }
   }
 
-  async onRegister() {
+  async onRegisterForm(event: Event) {
+    event.preventDefault();
     if (!this.validateInputs()) return;
-
     try {
       await this.auth.register(this.email, this.password);
       this.errorMessage = '';
