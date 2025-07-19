@@ -19,6 +19,21 @@ export class Menu {
     this.menuOpen = !this.menuOpen;
   }
 
+  goToProducts() {
+    this.router.navigate(['/products']);  // Redirige a la ruta /products
+    this.menuOpen = false;                // Cierra el menú
+  }
+
+  goToProviders() {
+    this.router.navigate(['/providers']);
+    this.menuOpen = false;
+  }
+
+  goToCategories() {
+    this.router.navigate(['/categories']);
+    this.menuOpen = false;
+  }
+
   async logout() {
     await this.auth.logout();
     this.router.navigate(['/login']);

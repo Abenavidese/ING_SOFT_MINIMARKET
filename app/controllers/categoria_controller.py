@@ -16,11 +16,11 @@ def get_db():
     finally:
         db.close()
 
-@router.post("/", response_model=CategoriaOut)
+@router.post("", response_model=CategoriaOut)
 def crear_categoria(categoria: CategoriaCreate, db: Session = Depends(get_db)):
     return categoria_service.crear_categoria(db, categoria)
 
-@router.get("/", response_model=list[CategoriaOut])
+@router.get("", response_model=list[CategoriaOut])
 def listar_categorias(db: Session = Depends(get_db)):
     return categoria_service.listar_categorias(db)
 

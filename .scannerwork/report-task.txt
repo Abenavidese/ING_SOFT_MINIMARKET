@@ -1,0 +1,6 @@
+projectKey=mini_market
+serverUrl=http://localhost:9000
+serverVersion=25.6.0.109173
+dashboardUrl=http://localhost:9000/dashboard?id=mini_market
+ceTaskId=db3e1697-8c64-43a3-ac8a-22bfbdb1d15c
+ceTaskUrl=http://localhost:9000/api/ce/task?id=db3e1697-8c64-43a3-ac8a-22bfbdb1d15c

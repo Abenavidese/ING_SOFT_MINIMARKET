@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
+from fastapi import HTTPException
 from app.models.caja import Caja
-from app.schemas.caja_schema import CajaCreate
+from app.schemas.caja_schema import CajaCreate, CajaUpdate
 from app.repositories import caja_repository
-from app.schemas.caja_schema import CajaUpdate
 
 def crear_caja_service(db: Session, caja_data: CajaCreate) -> Caja:
     nueva_caja = Caja(**caja_data.model_dump())

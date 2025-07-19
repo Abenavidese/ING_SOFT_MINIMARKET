@@ -1,0 +1,33 @@
+<h2>Gestión de Categorías</h2>
+
+<!-- Formulario para crear -->
+<form (ngSubmit)="crearCategoria()" *ngIf="!editando">
+  <input type="text" [(ngModel)]="nuevaCategoria.nombre" name="nombre" placeholder="Nombre" required>
+  <button type="submit">Agregar Categoría</button>
+</form>
+
+<!-- Formulario para editar -->
+<form (ngSubmit)="guardarEdicion()" *ngIf="editando">
+  <input type="text" [(ngModel)]="categoriaEditando.nombre" name="nombreEdit" placeholder="Nombre" required>
+  <button type="submit">Guardar Cambios</button>
+  <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+</form>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of categorias">
+      <td>{{ c.id }}</td>
+      <td>{{ c.nombre }}</td>
+      <td>
+        <button (click)="editarCategoria(c)">Editar</button>
+        <button (click)="eliminarCategoria(c.id!)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

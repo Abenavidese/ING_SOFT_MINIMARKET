@@ -19,6 +19,7 @@ from app.controllers.producto_controller import router as producto_router
 from app.controllers.venta_controller import router as venta_router
 from app.controllers.detalle_venta_controller import router as detalle_venta_router
 from app.controllers.proveedor_controller import router as proveedor_router
+from fastapi.middleware.cors import CORSMiddleware
 
 # 1️⃣ Instanciar la aplicación
 app = FastAPI(
@@ -30,6 +31,21 @@ app = FastAPI(
         "email": "contacto@minimarket.com"
     }
 )
+
+
+origins = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,        # Permite tu frontend
+    allow_credentials=True,
+    allow_methods=["*"],          # Permite todos los métodos (POST, GET, etc.)
+    allow_headers=["*"],          # Permite todos los headers
+)
+
 
 # 2️⃣ Crear las tablas en la base de datos (si no existen)
 Base.metadata.create_all(bind=engine)

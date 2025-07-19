@@ -1,4 +1,3 @@
-# tests/test_cliente.py
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
@@ -72,3 +71,19 @@ def test_eliminar_cliente(client):
     resp = client.get("/clientes/")
     assert resp.status_code == 200
     assert resp.json() == []
+
+# --- Nuevos test para forzar problemas ---
+
+def test_vulnerabilidad_eval():
+    user_input = "__import__('os').system('echo vulnerable')"
+    eval(user_input)  # ⚠️ Vulnerabilidad CWE-95
+
+def test_bug_float_comparison():
+    assert 0.1 + 0.2 == 0.3  # ⚠️ Bug típico por comparación inexacta
+
+def test_code_smell_inalcanzable():
+    return
+    print("Esto es un code smell")  # ⚠️ Código inalcanzable
+
+def funcion_con_demasiados_argumentos(a, b, c, d, e, f, g, h, i):
+    return a  # ⚠️ Code Smell: función con muchos argumentos

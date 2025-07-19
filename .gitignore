@@ -2,7 +2,9 @@ ver_tablas.py
 
 # Virtual environment
 venv/
-
+_python_env/
+_pycache/
+__pycache__/
 # Coverage reports
 htmlcov/
 coverage.xml
