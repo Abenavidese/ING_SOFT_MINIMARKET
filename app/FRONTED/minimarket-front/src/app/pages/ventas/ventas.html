@@ -1,0 +1,23 @@
+<div class="ventas-container">
+  <h1>Gestión de Ventas</h1>
+
+  <!-- Botón para generar venta -->
+  <button (click)="generarVenta()" class="btn-generar">Generar Venta</button>
+  <button *ngIf="ventaCreada" (click)="limpiarVenta()" class="btn-cancelar">
+    Finalizar Venta
+  </button>
+
+  <!-- Mensaje dinámico -->
+  <div *ngIf="mensaje" class="mensaje-exito">
+    {{ mensaje }}
+  </div>
+
+  <!-- Mostrar datos de la venta activa -->
+  <div *ngIf="ventaCreada" class="venta-info">
+    <h3>Venta Actual</h3>
+    <p><strong>ID:</strong> {{ ventaCreada?.id }}</p>
+    <p><strong>Cliente:</strong> {{ ventaCreada?.cliente_id }}</p>
+    <p><strong>Total:</strong> {{ ventaCreada?.total }} USD</p>
+    <p><strong>Detalles:</strong> {{ ventaCreada?.detalles?.length || 0 }} items</p>
+  </div>
+</div>
