@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.venta import Venta
-from typing import List
+from typing import List, Optional
 
 def crear_venta(db: Session, venta: Venta) -> Venta:
     db.add(venta)
@@ -8,8 +8,11 @@ def crear_venta(db: Session, venta: Venta) -> Venta:
     db.refresh(venta)
     return venta
 
-def obtener_ventas(db: Session) -> List[Venta]:
-    return db.query(Venta).all()
+def obtener_ventas(db: Session, cliente_id: Optional[str] = None) -> list[Venta]:
+    query = db.query(Venta)
+    if cliente_id:
+        query = query.filter(Venta.cliente_id == cliente_id)
+    return query.all()
 
 def eliminar_venta(db: Session, venta_id: int) -> bool:
     venta = db.query(Venta).filter(Venta.id == venta_id).first()

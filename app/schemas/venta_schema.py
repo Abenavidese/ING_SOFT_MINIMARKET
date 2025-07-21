@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from .detalle_venta_schema import DetalleVentaOut
 
 class VentaCreate(BaseModel):
-    cliente_id: int
+    cliente_id: str  # Cambiado a string para UID Firebase
     total: float
 
 class VentaOut(VentaCreate):
@@ -12,9 +12,9 @@ class VentaOut(VentaCreate):
     detalles: List[DetalleVentaOut] = []
 
     class Config:
-        orm_mode = True  # Si estás en Pydantic v2, cámbialo por 'from_attributes = True'
+        orm_mode = True  # Si usas Pydantic v2, reemplaza con 'from_attributes = True'
 
 class VentaUpdate(BaseModel):
-    cliente_id: Optional[int]
+    cliente_id: Optional[str]  # Cambiado a string
     fecha: Optional[datetime]
     total: Optional[float]

@@ -1,11 +1,11 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, String, Boolean
 from app.config.database import Base
 
 class Cliente(Base):
     __tablename__ = "clientes"
 
-    id = Column(Integer, primary_key=True, index=True)
-    nombre = Column(String)
-    email = Column(String)       
-    telefono = Column(String)    
+    id = Column(String, primary_key=True, index=True)  # UID de Firebase como ID
+    nombre = Column(String, nullable=False)
+    email = Column(String, nullable=False)
+    telefono = Column(String, nullable=False)
     frecuente = Column(Boolean, default=False)

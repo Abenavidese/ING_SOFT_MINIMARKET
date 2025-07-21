@@ -10,7 +10,7 @@ def crear_cliente(db: Session, cliente: Cliente) -> Cliente:
 def obtener_todos_los_clientes(db: Session) -> list[Cliente]:
     return db.query(Cliente).all()
 
-def eliminar_cliente(db: Session, cliente_id: int) -> bool:
+def eliminar_cliente(db: Session, cliente_id: str) -> bool:
     cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
     if cliente:
         db.delete(cliente)
