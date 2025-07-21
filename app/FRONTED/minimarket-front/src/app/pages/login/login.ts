@@ -12,8 +12,10 @@ import { AuthService } from '../../services/auth';
   styleUrls: ['./login.scss']
 })
 export class LoginComponent {
+  nombre = '';
   email = '';
   password = '';
+  telefono = '';
   errorMessage = '';
   isRegisterMode = false;
 
@@ -26,7 +28,7 @@ export class LoginComponent {
 
   async onLogin(event: Event) {
     event.preventDefault();
-    if (!this.validateInputs()) return;
+    if (!this.validateInputs(false)) return;
     try {
       await this.auth.login(this.email, this.password);
       this.errorMessage = '';
@@ -39,11 +41,11 @@ export class LoginComponent {
 
   async onRegisterForm(event: Event) {
     event.preventDefault();
-    if (!this.validateInputs()) return;
+    if (!this.validateInputs(true)) return;
     try {
-      await this.auth.register(this.email, this.password);
+      await this.auth.register(this.nombre, this.telefono, this.email, this.password);
       this.errorMessage = '';
-      alert('Usuario registrado con éxito');
+      alert(`Usuario "${this.nombre}" registrado con éxito`);
       this.router.navigate(['/home']);
     } catch (error: any) {
       console.error('Error Firebase (Register):', error);
@@ -51,7 +53,15 @@ export class LoginComponent {
     }
   }
 
-  validateInputs(): boolean {
+  validateInputs(isRegister: boolean): boolean {
+    if (isRegister && this.nombre.trim().length < 2) {
+      this.errorMessage = 'El nombre debe tener al menos 2 caracteres.';
+      return false;
+    }
+    if (isRegister && this.telefono.trim().length < 7) {
+      this.errorMessage = 'El teléfono debe tener al menos 7 dígitos.';
+      return false;
+    }
     if (!this.email.includes('@')) {
       this.errorMessage = 'El email no es válido.';
       return false;

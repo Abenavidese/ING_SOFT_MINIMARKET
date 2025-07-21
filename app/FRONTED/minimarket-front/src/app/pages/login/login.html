@@ -27,6 +27,14 @@
       <form (submit)="onRegisterForm($event)">
         <div class="input-group">
           <i class="fas fa-envelope"></i>
+          <input type="nombre" [(ngModel)]="nombre" name="registerNombre" placeholder="Nombre" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-phone"></i>
+          <input type="tel" [(ngModel)]="telefono" name="registerPhone" placeholder="Teléfono" required>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
           <input type="email" [(ngModel)]="email" name="registerEmail" placeholder="Email" required>
         </div>
         <div class="input-group">
