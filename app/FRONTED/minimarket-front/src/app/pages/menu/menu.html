@@ -9,10 +9,11 @@
   </div>
   <ul class="menu-list">
     <li><i class="fas fa-home"></i> Inicio</li>
-    <li><i class="fas fa-user"></i> Perfil</li>
+    <li (click)="goToPerfil()"><i class="fas fa-user"></i> Perfil</li>
     <li (click)="goToProducts()"><i class="fas fa-shopping-cart"></i> Productos</li>
     <li (click)="goToProviders()"><i class="fa fa-user"></i> Proveedores</li>
     <li (click)="goToCategories()"><i class="fa fa-shopping-cart"></i> Categorias</li>
+    <li (click)="goToVentas()"><i class="fa fa-shopping-cart"></i> Ventas</li>
     <li><i class="fas fa-cog"></i> Configuración</li>
     <li (click)="logout()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</li>
   </ul>

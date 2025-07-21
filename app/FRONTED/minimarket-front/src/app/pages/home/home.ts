@@ -12,10 +12,23 @@ import { Menu } from '../menu/menu';
   styleUrls: ['./home.scss']
 })
 export class HomeComponent {
-  constructor(private auth: AuthService, private router: Router) {}
+  userName: string | null = null;
+  userId: string | null = null;
+  constructor(private auth: AuthService, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.userName = this.auth.currentUser?.displayName || 'Usuario sin nombre';
+    this.userId = this.auth.currentUser?.uid || 'UID no disponible';
+    console.log('Usuario actual:', this.userName, 'ID:', this.userId);
+    console.log(this.auth.currentUser?.email);
+
+  }
+  
 
   async logout() {
     await this.auth.logout();
     this.router.navigate(['/login']);
   }
+  
 }

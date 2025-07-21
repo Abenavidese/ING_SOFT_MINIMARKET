@@ -24,6 +24,16 @@ export class Menu {
     this.menuOpen = false;                // Cierra el menú
   }
 
+  goToPerfil() {
+    this.router.navigate(['/perfil']);  
+    this.menuOpen = false;     
+  }
+
+  goToVentas() {
+  this.router.navigate(['/ventas']);  
+  this.menuOpen = false;     
+  }
+
   goToProviders() {
     this.router.navigate(['/providers']);
     this.menuOpen = false;
