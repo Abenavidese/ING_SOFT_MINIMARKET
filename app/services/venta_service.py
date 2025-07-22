@@ -3,11 +3,15 @@ from fastapi import HTTPException
 from typing import Optional
 from app.models.venta import Venta
 from app.schemas.venta_schema import VentaCreate, VentaUpdate
-from app.repositories.venta_repository import crear_venta, obtener_ventas, eliminar_venta, actualizar_venta
+from app.repositories.venta_repository import crear_venta_con_detalles, obtener_ventas, eliminar_venta, actualizar_venta
 
 def registrar_venta_service(venta_data: VentaCreate, db: Session) -> Venta:
-    nueva_venta = Venta(cliente_id=venta_data.cliente_id, total=venta_data.total)
-    return crear_venta(db, nueva_venta)
+    return crear_venta_con_detalles(
+        db,
+        cliente_id=venta_data.cliente_id,
+        fecha=venta_data.fecha,
+        detalles=[det.dict() for det in venta_data.detalles]
+    )
 
 def listar_ventas_service(db: Session, cliente_id: Optional[str] = None):
     return obtener_ventas(db, cliente_id)  # ahora acepta filtro por cliente
