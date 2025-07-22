@@ -25,11 +25,13 @@ export class Products implements OnInit {
     categoria_id: 0
   };
 
+  editandoProducto: Producto | null = null; // <-- Guardamos el producto en edición
+
   constructor(
     private productService: ProductService,
     private proveedorService: ProveedorService,
     private categoriaService: CategoriaService,
-    private cdr: ChangeDetectorRef // <-- Inyectamos ChangeDetectorRef
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -42,7 +44,7 @@ export class Products implements OnInit {
     this.productService.listar().subscribe({
       next: (data) => {
         this.productos = data;
-        this.cdr.detectChanges(); // <-- Forzamos actualización de la vista
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al listar productos:', err)
     });
@@ -95,5 +97,27 @@ export class Products implements OnInit {
       next: () => this.cargarProductos(),
       error: (err) => console.error('Error al eliminar producto:', err)
     });
+  }
+
+  // ---- NUEVO ----
+
+  editarProducto(producto: Producto) {
+    this.editandoProducto = { ...producto }; // Clonamos el producto a editar
+  }
+
+  cancelarEdicion() {
+    this.editandoProducto = null;
+  }
+
+  actualizarProducto() {
+    if (this.editandoProducto && this.editandoProducto.id) {
+      this.productService.actualizar(this.editandoProducto.id, this.editandoProducto).subscribe({
+        next: () => {
+          this.editandoProducto = null;
+          this.cargarProductos();
+        },
+        error: (err) => console.error('Error al actualizar producto:', err)
+      });
+    }
   }
 }

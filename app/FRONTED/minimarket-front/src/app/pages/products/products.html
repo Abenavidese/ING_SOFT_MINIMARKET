@@ -36,6 +36,8 @@
   <button type="submit">Agregar Producto</button>
 </form>
 
+<hr />
+
 <table>
   <thead>
     <tr>
@@ -45,17 +47,39 @@
       <th>Stock</th>
       <th>Proveedor</th>
       <th>Categoría</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let p of productos">
       <td>{{ p.id }}</td>
-      <td>{{ p.nombre }}</td>
-      <td>{{ p.precio }}</td>
-      <td>{{ p.stock }}</td>
+
+      <!-- Campo editable: Nombre -->
+      <td *ngIf="editandoProducto?.id !== p.id">{{ p.nombre }}</td>
+      <td *ngIf="editandoProducto?.id === p.id">
+        <input [(ngModel)]="editandoProducto!.nombre" name="editNombre" />
+      </td>
+
+      <!-- Campo editable: Precio -->
+      <td *ngIf="editandoProducto?.id !== p.id">{{ p.precio }}</td>
+      <td *ngIf="editandoProducto?.id === p.id">
+        <input [(ngModel)]="editandoProducto!.precio" name="editPrecio" type="number" />
+      </td>
+
+      <!-- Campo editable: Stock -->
+      <td *ngIf="editandoProducto?.id !== p.id">{{ p.stock }}</td>
+      <td *ngIf="editandoProducto?.id === p.id">
+        <input [(ngModel)]="editandoProducto!.stock" name="editStock" type="number" />
+      </td>
+
+      <!-- No se editan Proveedor ni Categoría -->
       <td>{{ p.proveedor_id }}</td>
       <td>{{ p.categoria_id }}</td>
+
       <td>
+        <button *ngIf="editandoProducto?.id !== p.id" class="btn-editar" (click)="editarProducto(p)">Editar</button>
+        <button *ngIf="editandoProducto?.id === p.id" (click)="actualizarProducto()">Guardar</button>
+        <button *ngIf="editandoProducto?.id === p.id" (click)="cancelarEdicion()">Cancelar</button>
         <button (click)="eliminarProducto(p.id!)">Eliminar</button>
       </td>
     </tr>
