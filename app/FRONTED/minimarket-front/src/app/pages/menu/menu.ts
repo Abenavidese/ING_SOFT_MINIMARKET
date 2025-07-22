@@ -44,6 +44,11 @@ export class Menu {
     this.menuOpen = false;
   }
 
+  goToCaja(){
+    this.router.navigate(['/caja']);
+    this.menuOpen = false;
+  }
+
   async logout() {
     await this.auth.logout();
     this.router.navigate(['/login']);

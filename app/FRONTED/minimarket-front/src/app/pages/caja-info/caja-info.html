@@ -1,0 +1,24 @@
+<h2>Datos de Caja</h2>
+
+<label for="fechaCaja">Seleccionar fecha:</label>
+<input
+  type="date"
+  id="fechaCaja"
+  [(ngModel)]="fechaSeleccionada"
+  (keydown.enter)="buscarCaja()"
+  [disabled]="loading"
+/>
+
+<button (click)="buscarCaja()" [disabled]="loading">
+  {{ loading ? 'Cargando...' : 'Buscar Caja' }}
+</button>
+
+<div *ngIf="caja" class="caja-info">
+  <h3>Caja del día {{ caja.fecha | date:'dd/MM/yyyy' }}</h3>
+  <p>Estado: {{ caja.estado }}</p>
+  <p>Total ventas del día: {{ caja.total_dia | currency:'USD' }}</p>
+</div>
+
+<div *ngIf="error" class="error-message">
+  {{ error }}
+</div>

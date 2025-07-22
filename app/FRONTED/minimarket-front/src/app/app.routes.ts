@@ -7,6 +7,7 @@ import { Providers } from './pages/providers/providers';
 import { Categories } from './pages/categories/categories'; 
 import { Perfil } from './pages/perfil/perfil';
 import { Ventas } from './pages/ventas/ventas';
+import { CajaInfo } from './pages/caja-info/caja-info';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'categories', component: Categories, canActivate: [authGuard] },
   { path: 'perfil', component: Perfil, canActivate: [authGuard] },
   { path: 'ventas', component: Ventas, canActivate: [authGuard] },
+  { path: 'caja', component: CajaInfo, canActivate: [authGuard] },
   { path: '**', redirectTo: 'login' }
 ]; 
