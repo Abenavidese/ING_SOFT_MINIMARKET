@@ -1,10 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from app.config.database import SessionLocal
 from app.schemas.caja_schema import CajaCreate, CajaOut
 from app.services import caja_service
 from app.schemas.caja_schema import CajaUpdate
-from app.services.caja_service import actualizar_caja_service
+from app.services.caja_service import actualizar_caja_service, obtener_caja_con_total_dinamico
+from datetime import date
 
 router = APIRouter(prefix="/cajas", tags=["Cajas"])
 
@@ -33,3 +34,7 @@ def eliminar_caja(caja_id: int, db: Session = Depends(get_db)):
 @router.put("/{caja_id}", response_model=CajaOut)
 def actualizar_caja(caja_id: int, data: CajaUpdate, db: Session = Depends(get_db)):
     return actualizar_caja_service(db, caja_id, data)
+
+@router.get("/por-fecha/", response_model=CajaOut)
+def get_caja_por_fecha(fecha: date = Query(...), db: Session = Depends(get_db)):
+    return obtener_caja_con_total_dinamico(db, fecha)

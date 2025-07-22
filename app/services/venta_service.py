@@ -4,14 +4,22 @@ from typing import Optional
 from app.models.venta import Venta
 from app.schemas.venta_schema import VentaCreate, VentaUpdate
 from app.repositories.venta_repository import crear_venta_con_detalles, obtener_ventas, eliminar_venta, actualizar_venta
+from app.models.caja import Caja
 
 def registrar_venta_service(venta_data: VentaCreate, db: Session) -> Venta:
-    return crear_venta_con_detalles(
-        db,
-        cliente_id=venta_data.cliente_id,
-        fecha=venta_data.fecha,
-        detalles=[det.dict() for det in venta_data.detalles]
-    )
+    # Crear venta
+    venta = crear_venta_con_detalles(db, venta_data.cliente_id, venta_data.fecha, [det.dict() for det in venta_data.detalles])
+
+    # Asegurar que caja existe para la fecha
+    caja = db.query(Caja).filter(Caja.fecha == venta.fecha).first()
+    if not caja:
+        nueva_caja = Caja(fecha=venta.fecha, estado="abierta", total_dia=0.0)
+        db.add(nueva_caja)
+        db.commit()
+        db.refresh(nueva_caja)
+
+    return venta
+
 
 def listar_ventas_service(db: Session, cliente_id: Optional[str] = None):
     return obtener_ventas(db, cliente_id)  # ahora acepta filtro por cliente

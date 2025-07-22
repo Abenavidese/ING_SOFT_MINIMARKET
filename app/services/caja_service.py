@@ -3,6 +3,9 @@ from fastapi import HTTPException
 from app.models.caja import Caja
 from app.schemas.caja_schema import CajaCreate, CajaUpdate
 from app.repositories import caja_repository
+from sqlalchemy import func
+from datetime import date
+from app.models.venta import Venta
 
 def crear_caja_service(db: Session, caja_data: CajaCreate) -> Caja:
     nueva_caja = Caja(**caja_data.model_dump())
@@ -25,3 +28,17 @@ def actualizar_caja_service(db: Session, caja_id: int, data: CajaUpdate) -> Caja
     db.commit()
     db.refresh(caja)
     return caja
+
+def obtener_caja_con_total_dinamico(db: Session, fecha: date) -> dict:
+    caja = db.query(Caja).filter(Caja.fecha == fecha).first()
+    if not caja:
+        raise HTTPException(status_code=404, detail="Caja no encontrada para la fecha")
+
+    total_ventas = db.query(func.sum(Venta.total)).filter(Venta.fecha == fecha).scalar() or 0.0
+
+    return {
+        "id": caja.id,
+        "fecha": caja.fecha,
+        "estado": caja.estado,
+        "total_dia": total_ventas
+    }
