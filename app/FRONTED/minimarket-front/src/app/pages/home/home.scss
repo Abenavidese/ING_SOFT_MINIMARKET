@@ -1,0 +1,131 @@
+@use "sass:color";
+
+$primary-color: #6c63ff;
+$secondary-color: #3b2db0;
+$dark-bg: #1a1a1a;
+$light-text: #f5f5f5;
+$muted-text: #bbb;
+
+.inicio-hero {
+  background: linear-gradient(135deg, #23232e, #3c3c4f);
+  color: $light-text;
+  padding: 80px 20px;
+  text-align: center;
+  animation: fadeInHero 1s ease forwards;
+
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      animation: slideDown 1s ease forwards;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      color: $muted-text;
+      animation: fadeIn 1.3s ease forwards;
+    }
+
+    .btn-start {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(135deg, $primary-color, $secondary-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      animation: fadeIn 1.5s ease forwards;
+
+      &:hover {
+        transform: scale(1.08);
+        box-shadow: 0 4px 15px rgba(108, 99, 255, 0.5);
+      }
+    }
+  }
+}
+
+.inicio-container {
+  background: #fff;
+  max-width: 900px;
+  margin: -40px auto 40px auto;
+  padding: 40px 50px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease forwards;
+
+  section {
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 1.5rem;
+      color: $primary-color;
+      margin-bottom: 10px;
+      position: relative;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding-left: 20px;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        color: #444;
+        position: relative;
+
+        &::before {
+          content: "•";
+          position: absolute;
+          left: 0;
+          color: $secondary-color;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+
+    .btn-github {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #333, #000);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+
+@keyframes fadeInHero {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-15px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

@@ -18,6 +18,11 @@ export class Menu {
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
   }
+  goToHome() {
+  this.router.navigate(['/home']);
+  this.menuOpen = false;
+}
+
 
   goToProducts() {
     this.router.navigate(['/products']);  // Redirige a la ruta /products

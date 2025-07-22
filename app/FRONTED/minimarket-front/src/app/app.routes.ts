@@ -19,4 +19,4 @@ export const routes: Routes = [
   { path: 'ventas', component: Ventas, canActivate: [authGuard] },
   { path: 'caja', component: CajaInfo, canActivate: [authGuard] },
   { path: '**', redirectTo: 'login' }
-]; 
+];

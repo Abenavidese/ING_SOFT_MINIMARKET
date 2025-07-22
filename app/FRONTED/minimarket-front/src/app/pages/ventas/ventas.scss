@@ -1,0 +1,176 @@
+@use "sass:color";
+
+$page-bg: #f3f3f3;
+$card-bg: #fff;
+$highlight-color: #6c63ff;
+$secondary-color: #3b2db0;
+$text-dark: #333;
+$text-light: #555;
+
+.ventas-container {
+  background: $card-bg;
+  padding: 35px 45px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 40px auto;
+  animation: fadeIn 0.6s ease forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  h1, h3 {
+    color: $text-dark;
+    margin-bottom: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #fafafa;
+      margin-bottom: 8px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #f1f1f1;
+        transform: translateX(2px);
+      }
+
+      input[type="number"] {
+        width: 60px;
+        padding: 5px;
+        margin: 0 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 0.9rem;
+        transition: border 0.3s;
+
+        &:focus {
+          border-color: $highlight-color;
+          outline: none;
+        }
+      }
+
+      button {
+        background: linear-gradient(135deg, $highlight-color, $secondary-color);
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover:not(:disabled) {
+          transform: scale(1.05);
+          box-shadow: 0 2px 8px rgba(108, 99, 255, 0.4);
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    color: $text-light;
+    margin: 8px 0;
+
+    strong {
+      color: $text-dark;
+    }
+  }
+
+  .btn-generar,
+  .btn-cancelar {
+    display: inline-block;
+    width: calc(50% - 5px);
+    padding: 12px 18px;
+    font-size: 1rem;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-generar {
+    background: linear-gradient(135deg, $highlight-color, $secondary-color);
+    color: #fff;
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(108, 99, 255, 0.4);
+    }
+  }
+
+  .btn-cancelar {
+    background: #ccc;
+    color: #333;
+
+    &:hover {
+      background: color.adjust(#ccc, $lightness: -10%);
+    }
+  }
+
+  .mensaje-exito {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(108, 99, 255, 0.1);
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    color: $secondary-color;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .venta-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+
+    h3 {
+      margin-bottom: 10px;
+      color: $text-dark;
+    }
+
+    p {
+      color: $text-light;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
