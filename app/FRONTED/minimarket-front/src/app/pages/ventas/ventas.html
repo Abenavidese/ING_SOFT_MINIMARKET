@@ -1,13 +1,47 @@
 <div class="ventas-container">
   <h1>Gestión de Ventas</h1>
 
-  <!-- Botón para generar venta -->
-  <button (click)="generarVenta()" class="btn-generar">Generar Venta</button>
+  <!-- Lista productos disponibles -->
+  <h3>Productos disponibles</h3>
+  <ul>
+    <li *ngFor="let p of productos">
+      {{ p.nombre }} - Precio: {{ p.precio }} - Stock: {{ p.stock }}
+      <button
+        (click)="agregarProducto(p)"
+        [disabled]="isProductoSeleccionado(p.id!)"
+      >
+        Agregar
+      </button>
+    </li>
+  </ul>
+
+  <!-- Productos seleccionados con cantidad editable -->
+  <h3>Productos seleccionados</h3>
+  <ul>
+    <li *ngFor="let ps of productosSeleccionados">
+      {{ ps.producto.nombre }} - Precio: {{ ps.producto.precio }}
+      <input
+        type="number"
+        [value]="ps.cantidad"
+        (change)="cambiarCantidad(ps.producto.id!, $event.target.valueAsNumber)"
+        min="1"
+        [max]="ps.producto.stock"
+      />
+      <button (click)="quitarProducto(ps.producto.id!)">Quitar</button>
+    </li>
+  </ul>
+
+  <!-- Totales -->
+  <p>Subtotal: {{ subtotal }}</p>
+  <p>Total: {{ total }}</p>
+
+  <!-- Botones de acción -->
+  <button (click)="generarVenta()" class="btn-generar">Registrar Venta</button>
   <button *ngIf="ventaCreada" (click)="limpiarVenta()" class="btn-cancelar">
     Finalizar Venta
   </button>
 
-  <!-- Mensaje dinámico -->
+  <!-- Mensajes -->
   <div *ngIf="mensaje" class="mensaje-exito">
     {{ mensaje }}
   </div>
@@ -15,9 +49,9 @@
   <!-- Mostrar datos de la venta activa -->
   <div *ngIf="ventaCreada" class="venta-info">
     <h3>Venta Actual</h3>
-    <p><strong>ID:</strong> {{ ventaCreada?.id }}</p>
-    <p><strong>Cliente:</strong> {{ ventaCreada?.cliente_id }}</p>
-    <p><strong>Total:</strong> {{ ventaCreada?.total }} USD</p>
-    <p><strong>Detalles:</strong> {{ ventaCreada?.detalles?.length || 0 }} items</p>
+    <p><strong>ID:</strong> {{ ventaCreada.id }}</p>
+    <p><strong>Cliente:</strong> {{ ventaCreada.cliente_id }}</p>
+    <p><strong>Total:</strong> {{ ventaCreada.total }} USD</p>
+    <p><strong>Detalles:</strong> {{ ventaCreada.detalles.length || 0 }} items</p>
   </div>
 </div>
