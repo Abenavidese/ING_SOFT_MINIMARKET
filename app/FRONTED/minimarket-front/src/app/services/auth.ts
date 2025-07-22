@@ -43,6 +43,12 @@ export class AuthService {
 
     return userCredential;
   }
+
+  async updateUserProfile(displayName: string) {
+    if (this.currentUser) {
+      await updateProfile(this.currentUser, { displayName });
+    }
+  }
   // Logout
   logout() {
     return signOut(this.auth);

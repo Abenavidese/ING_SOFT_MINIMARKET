@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { Menu } from '../menu/menu'; 
 
+
 @Component({
   selector: 'app-home',
   standalone: true,

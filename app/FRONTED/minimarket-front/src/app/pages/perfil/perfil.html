@@ -1,9 +1,17 @@
 <div class="perfil-container">
   <h2>Mi Perfil</h2>
-  <p><strong>Nombre:</strong> {{ userName }}</p>
-  <p><strong>Teléfono:</strong> {{ userTelefono }}</p>
-  <p><strong>Email:</strong> {{ userEmail }}</p>
-  <p><strong>ID (UID):</strong> {{ userUid }}</p>
 
-  <button class="btn-logout" (click)="logout()">Cerrar Sesión</button>
+  <label>
+    <strong>Nombre:</strong>
+    <input [(ngModel)]="userName" placeholder="Ingresa tu nombre" />
+  </label>
+
+  <label>
+    <strong>Teléfono:</strong>
+    <input [(ngModel)]="userTelefono" placeholder="Ingresa tu teléfono" />
+  </label>
+
+  <p><strong>Email:</strong> {{ userEmail }}</p>
+
+  <button class="btn-save" (click)="guardarCambios()">Guardar Cambios</button>
 </div>

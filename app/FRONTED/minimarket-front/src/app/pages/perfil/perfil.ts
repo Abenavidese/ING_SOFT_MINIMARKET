@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './perfil.html',
   styleUrls: ['./perfil.scss']
 })
@@ -16,12 +17,13 @@ export class Perfil implements OnInit {
   userEmail: string | null = null;
   userUid: string | null = null;
 
+  editMode: boolean = false; // NUEVO: Controla si los campos son editables
+
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
     const currentUser = this.auth.currentUser;
     if (currentUser) {
-      // Extraer nombre y teléfono del displayName (si están concatenados)
       const parts = currentUser.displayName?.split('|') || [];
       this.userName = parts[0]?.trim() || 'Sin nombre';
       this.userTelefono = parts[1]?.trim() || 'Sin teléfono';
@@ -30,8 +32,14 @@ export class Perfil implements OnInit {
     }
   }
 
-  async logout() {
-    await this.auth.logout();
-    this.router.navigate(['/login']);
+  toggleEdit() {
+    this.editMode = !this.editMode;
+  }
+
+  async guardarCambios() {
+    const displayName = `${this.userName} | ${this.userTelefono}`;
+    await this.auth.updateUserProfile(displayName);
+    this.editMode = false; // Desactivar edición tras guardar
+    alert('Datos actualizados correctamente');
   }
 }
