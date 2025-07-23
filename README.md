@@ -125,7 +125,64 @@ PUT /ventas/1
 
 - Agrega autenticación con JWT para mayor seguridad si se conecta a frontend.
 
+### Frontend - Aplicación Web Angular
+El frontend está desarrollado en Angular y consume la API REST del backend para gestionar todas las entidades del minimarket. Proporciona una interfaz amigable y funcional para los usuarios finales.
 
+Funcionalidades principales
+  - Gestión completa de:
+    - Categorías
+    - Cajas
+    - Clientes
+    - Productos
+    - Ventas y detalles de venta
+    - Proveedores
+
+  - Formularios validados para creación y actualización.
+  - Visualización de listas con paginación y búsqueda.
+  - Comunicación asíncrona con el backend mediante HTTPClient.
+  - Manejo básico de estados y errores en la interfaz.
+  - Navegación y diseño responsivo para mejor experiencia.
+
+```text
+mini_market/
+|
+└──app/FRONTEND/minimarket-front/
+|    ├── components/      # Componentes reutilizables y vistas
+│    ├── services/        # Servicios para llamadas API
+│    ├── app-routing.module.ts  # Configuración de rutas
+│    └── app.module.ts    # Módulo principal
+└── package.json             # Dependencias del frontend
+```
+
+### Instalación y Ejecución
+  
+  1. Instalar dependencias:
+  
+  ```bash
+  cd front-end
+  npm install
+  ```
+
+  2. Ejecutar el servidor de desarrollo:
+
+  ```bash
+  ng serve --open
+  ```
+
+  3. La aplicación se abrirá en el navegador en
+
+  ```bash
+  http://localhost:4200.
+  ```
+
+### Interfaz de Usuario
+
+- Formularios con validaciones para evitar errores de entrada.
+- Listados con paginación, búsqueda y filtros para facilitar la navegación.
+- Mensajes de error y confirmación para mejorar la experiencia del usuario.
+- Navegación fluida entre vistas mediante rutas configuradas en Angular Router.
+- Diseño responsivo para uso en dispositivos móviles y de escritorio.
+  
 ### Autores
 
 
